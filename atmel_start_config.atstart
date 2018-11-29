@@ -1,5 +1,5 @@
 format_version: '2'
-name: My Project
+name: reefpi-firmware-pico-smc
 versions:
   api: '1.0'
   backend: 1.4.93
@@ -17,9 +17,9 @@ middlewares: {}
 drivers:
   ADC_0:
     user_label: ADC_0
-    definition: Atmel:SAMD10_Drivers:0.0.1::SAMD10D14A-MU::ADC::driver_config_definition::ADC::HAL:Driver:ADC.Sync
+    definition: Atmel:SAMD10_Drivers:0.0.1::SAMD10D14A-MU::ADC::driver_config_definition::ADC::HAL:Driver:ADC.Async
     functionality: ADC
-    api: HAL:Driver:ADC_Sync
+    api: HAL:Driver:ADC_Async
     configuration:
       adc_advanced_settings: false
       adc_arch_adjres: 0
@@ -45,12 +45,19 @@ drivers:
       adc_arch_winut: 0
       adc_differential_mode: false
       adc_freerunning_mode: false
-      adc_pinmux_negative: ADC AIN0 pin
-      adc_pinmux_positive: ADC AIN0 pin
+      adc_pinmux_negative: Internal ground
+      adc_pinmux_positive: ADC AIN3 pin
       adc_prescaler: Peripheral clock divided by 4
       adc_reference: 1.0V voltage reference
       adc_resolution: 12-bit
-    optional_signals: []
+    optional_signals:
+    - identifier: ADC_0:AIN/3
+      pad: PA05
+      mode: Enabled
+      configuration: null
+      definition: Atmel:SAMD10_Drivers:0.0.1::SAMD10D14A-MU::optional_signal_definition::ADC.AIN.3
+      name: ADC/AIN/3
+      label: AIN/3
     variant: null
     clocks:
       domain_group:
@@ -146,9 +153,9 @@ drivers:
         configuration: {}
   I2C_0:
     user_label: I2C_0
-    definition: Atmel:SAMD10_Drivers:0.0.1::SAMD10D14A-MU::SERCOM0::driver_config_definition::I2C.Slave.Standard~2FFast-mode::HAL:Driver:I2C.Slave.Sync
+    definition: Atmel:SAMD10_Drivers:0.0.1::SAMD10D14A-MU::SERCOM0::driver_config_definition::I2C.Slave.Standard~2FFast-mode::HAL:Driver:I2C.Slave.Async
     functionality: I2C
-    api: HAL:Driver:I2C_Slave_Sync
+    api: HAL:Driver:I2C_Slave_Async
     configuration:
       i2c_slave_address: 165
       i2c_slave_address_mask: 0

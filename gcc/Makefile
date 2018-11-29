@@ -45,7 +45,7 @@ hpl/core
 OBJS +=  \
 hal/src/hal_io.o \
 gcc/gcc/startup_samd10.o \
-hal/src/hal_i2c_s_sync.o \
+hal/src/hal_i2c_s_async.o \
 hal/utils/src/utils_syscalls.o \
 hal/src/hal_timer.o \
 hal/src/hal_pwm.o \
@@ -56,6 +56,7 @@ hal/utils/src/utils_list.o \
 hpl/core/hpl_core_m0plus_base.o \
 hal/utils/src/utils_assert.o \
 hpl/dmac/hpl_dmac.o \
+hal/src/hal_adc_async.o \
 hpl/pm/hpl_pm.o \
 hpl/gclk/hpl_gclk.o \
 hal/src/hal_init.o \
@@ -63,8 +64,8 @@ main.o \
 hpl/rtc/hpl_rtc.o \
 examples/driver_examples.o \
 driver_init.o \
-hal/src/hal_adc_sync.o \
 hpl/sercom/hpl_sercom.o \
+hal/utils/src/utils_ringbuffer.o \
 hal/src/hal_gpio.o \
 gcc/system_samd10.o \
 hal/utils/src/utils_event.o \
@@ -77,7 +78,7 @@ hpl/adc/hpl_adc.o
 OBJS_AS_ARGS +=  \
 "hal/src/hal_io.o" \
 "gcc/gcc/startup_samd10.o" \
-"hal/src/hal_i2c_s_sync.o" \
+"hal/src/hal_i2c_s_async.o" \
 "hal/utils/src/utils_syscalls.o" \
 "hal/src/hal_timer.o" \
 "hal/src/hal_pwm.o" \
@@ -88,6 +89,7 @@ OBJS_AS_ARGS +=  \
 "hpl/core/hpl_core_m0plus_base.o" \
 "hal/utils/src/utils_assert.o" \
 "hpl/dmac/hpl_dmac.o" \
+"hal/src/hal_adc_async.o" \
 "hpl/pm/hpl_pm.o" \
 "hpl/gclk/hpl_gclk.o" \
 "hal/src/hal_init.o" \
@@ -95,8 +97,8 @@ OBJS_AS_ARGS +=  \
 "hpl/rtc/hpl_rtc.o" \
 "examples/driver_examples.o" \
 "driver_init.o" \
-"hal/src/hal_adc_sync.o" \
 "hpl/sercom/hpl_sercom.o" \
+"hal/utils/src/utils_ringbuffer.o" \
 "hal/src/hal_gpio.o" \
 "gcc/system_samd10.o" \
 "hal/utils/src/utils_event.o" \
@@ -110,15 +112,16 @@ OBJS_AS_ARGS +=  \
 DEPS := $(OBJS:%.o=%.d)
 
 DEPS_AS_ARGS +=  \
-"hal/src/hal_i2c_s_sync.d" \
 "hal/utils/src/utils_event.d" \
 "hal/src/hal_io.d" \
 "gcc/gcc/startup_samd10.d" \
+"hal/src/hal_i2c_s_async.d" \
 "hal/utils/src/utils_syscalls.d" \
 "hal/src/hal_pwm.d" \
 "hal/src/hal_timer.d" \
 "hpl/core/hpl_core_m0plus_base.d" \
 "hal/utils/src/utils_list.d" \
+"hal/src/hal_adc_async.d" \
 "hpl/dmac/hpl_dmac.d" \
 "hal/utils/src/utils_assert.d" \
 "hal/src/hal_delay.d" \
@@ -127,12 +130,12 @@ DEPS_AS_ARGS +=  \
 "hpl/gclk/hpl_gclk.d" \
 "hal/src/hal_init.d" \
 "driver_init.d" \
-"hal/src/hal_adc_sync.d" \
 "main.d" \
 "examples/driver_examples.d" \
 "hpl/rtc/hpl_rtc.d" \
 "gcc/system_samd10.d" \
 "hal/src/hal_sleep.d" \
+"hal/utils/src/utils_ringbuffer.d" \
 "hpl/sercom/hpl_sercom.d" \
 "hal/src/hal_gpio.d" \
 "hal/src/hal_atomic.d" \

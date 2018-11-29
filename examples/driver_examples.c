@@ -10,30 +10,34 @@
 #include "driver_init.h"
 #include "utils.h"
 
+static void convert_cb_ADC_0(const struct adc_async_descriptor *const descr, const uint8_t channel)
+{
+}
+
 /**
  * Example of using ADC_0 to generate waveform.
  */
 void ADC_0_example(void)
 {
-	uint8_t buffer[2];
+	adc_async_register_callback(&ADC_0, 0, ADC_ASYNC_CONVERT_CB, convert_cb_ADC_0);
+	adc_async_enable_channel(&ADC_0, 0);
+	adc_async_start_conversion(&ADC_0);
+}
 
-	adc_sync_enable_channel(&ADC_0, 0);
+static struct io_descriptor *io;
 
-	while (1) {
-		adc_sync_read_channel(&ADC_0, 0, buffer, 2);
-	}
+static void I2C_0_rx_complete(const struct i2c_s_async_descriptor *const descr)
+{
+	uint8_t c;
+
+	io_read(io, &c, 1);
 }
 
 void I2C_0_example(void)
 {
-	struct io_descriptor *io;
-	uint8_t               c;
-
-	i2c_s_sync_get_io_descriptor(&I2C_0, &io);
-	i2c_s_sync_set_addr(&I2C_0, 1);
-	i2c_s_sync_enable(&I2C_0);
-
-	io_read(io, &c, 1);
+	i2c_s_async_get_io_descriptor(&I2C_0, &io);
+	i2c_s_async_register_callback(&I2C_0, I2C_S_RX_COMPLETE, I2C_0_rx_complete);
+	i2c_s_async_enable(&I2C_0);
 }
 
 static struct timer_task TIMER_0_task1, TIMER_0_task2;
