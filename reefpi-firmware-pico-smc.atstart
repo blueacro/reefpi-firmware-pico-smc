@@ -146,20 +146,21 @@ drivers:
         configuration: {}
   I2C_0:
     user_label: I2C_0
-    definition: Atmel:SAMD10_Drivers:0.0.1::SAMD10D14A-MU::SERCOM0::driver_config_definition::I2C.Master.Standard~2FFast-mode::HAL:Driver:I2C.Master.Sync
+    definition: Atmel:SAMD10_Drivers:0.0.1::SAMD10D14A-MU::SERCOM0::driver_config_definition::I2C.Slave.Standard~2FFast-mode::HAL:Driver:I2C.Slave.Sync
     functionality: I2C
-    api: HAL:Driver:I2C_Master_Sync
+    api: HAL:Driver:I2C_Slave_Sync
     configuration:
-      i2c_master_advanced: false
-      i2c_master_arch_dbgstop: Keep running
-      i2c_master_arch_inactout: Disabled
-      i2c_master_arch_lowtout: false
-      i2c_master_arch_mexttoen: false
-      i2c_master_arch_runstdby: false
-      i2c_master_arch_sdahold: 300-600ns hold time
-      i2c_master_arch_sexttoen: false
-      i2c_master_arch_trise: 215
-      i2c_master_baud_rate: 100000
+      i2c_slave_address: 165
+      i2c_slave_address_mask: 0
+      i2c_slave_advanced: false
+      i2c_slave_amode: Mask
+      i2c_slave_gencen: false
+      i2c_slave_lowtout: false
+      i2c_slave_runstdby: false
+      i2c_slave_sclsm: false
+      i2c_slave_sdahold: 300-600ns hold time
+      i2c_slave_sexttoen: false
+      i2c_slave_tenbiten: false
     optional_signals: []
     variant:
       specification: SDA=0, SCL=1
@@ -176,10 +177,10 @@ drivers:
         - name: Core
           input: Generic clock generator 0
         - name: Slow
-          input: Generic clock generator 3
+          input: Generic clock generator 0
         configuration:
           core_gclk_selection: Generic clock generator 0
-          slow_gclk_selection: Generic clock generator 3
+          slow_gclk_selection: Generic clock generator 0
   TIMER_0:
     user_label: TIMER_0
     definition: Atmel:SAMD10_Drivers:0.0.1::SAMD10D14A-MU::RTC::driver_config_definition::Timer::HAL:Driver:Timer

@@ -20,7 +20,7 @@ struct timer_descriptor TIMER_0;
 
 struct adc_sync_descriptor ADC_0;
 
-struct i2c_m_sync_desc I2C_0;
+struct i2c_s_sync_descriptor I2C_0;
 
 struct pwm_descriptor PWM_0;
 
@@ -75,7 +75,7 @@ void I2C_0_CLOCK_init(void)
 void I2C_0_init(void)
 {
 	I2C_0_CLOCK_init();
-	i2c_m_sync_init(&I2C_0, SERCOM0);
+	i2c_s_sync_init(&I2C_0, SERCOM0);
 	I2C_0_PORT_init();
 }
 

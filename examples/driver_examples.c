@@ -26,12 +26,14 @@ void ADC_0_example(void)
 
 void I2C_0_example(void)
 {
-	struct io_descriptor *I2C_0_io;
+	struct io_descriptor *io;
+	uint8_t               c;
 
-	i2c_m_sync_get_io_descriptor(&I2C_0, &I2C_0_io);
-	i2c_m_sync_enable(&I2C_0);
-	i2c_m_sync_set_slaveaddr(&I2C_0, 0x12, I2C_M_SEVEN);
-	io_write(I2C_0_io, (uint8_t *)"Hello World!", 12);
+	i2c_s_sync_get_io_descriptor(&I2C_0, &io);
+	i2c_s_sync_set_addr(&I2C_0, 1);
+	i2c_s_sync_enable(&I2C_0);
+
+	io_read(io, &c, 1);
 }
 
 static struct timer_task TIMER_0_task1, TIMER_0_task2;

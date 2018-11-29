@@ -45,10 +45,10 @@ hpl/core
 OBJS +=  \
 hal/src/hal_io.o \
 gcc/gcc/startup_samd10.o \
+hal/src/hal_i2c_s_sync.o \
 hal/utils/src/utils_syscalls.o \
 hal/src/hal_timer.o \
 hal/src/hal_pwm.o \
-hal/src/hal_i2c_m_sync.o \
 hal/src/hal_delay.o \
 hpl/sysctrl/hpl_sysctrl.o \
 hpl/core/hpl_init.o \
@@ -77,10 +77,10 @@ hpl/adc/hpl_adc.o
 OBJS_AS_ARGS +=  \
 "hal/src/hal_io.o" \
 "gcc/gcc/startup_samd10.o" \
+"hal/src/hal_i2c_s_sync.o" \
 "hal/utils/src/utils_syscalls.o" \
 "hal/src/hal_timer.o" \
 "hal/src/hal_pwm.o" \
-"hal/src/hal_i2c_m_sync.o" \
 "hal/src/hal_delay.o" \
 "hpl/sysctrl/hpl_sysctrl.o" \
 "hpl/core/hpl_init.o" \
@@ -110,11 +110,11 @@ OBJS_AS_ARGS +=  \
 DEPS := $(OBJS:%.o=%.d)
 
 DEPS_AS_ARGS +=  \
+"hal/src/hal_i2c_s_sync.d" \
 "hal/utils/src/utils_event.d" \
 "hal/src/hal_io.d" \
 "gcc/gcc/startup_samd10.d" \
 "hal/utils/src/utils_syscalls.d" \
-"hal/src/hal_i2c_m_sync.d" \
 "hal/src/hal_pwm.d" \
 "hal/src/hal_timer.d" \
 "hpl/core/hpl_core_m0plus_base.d" \
