@@ -154,9 +154,7 @@ void system_init(void)
 	                   // <true"> High
 	                   true);
 
-	// Set pin direction to output
 	gpio_set_pin_direction(VEN, GPIO_DIRECTION_OUT);
-
 	gpio_set_pin_function(VEN, GPIO_PIN_FUNCTION_OFF);
 
 	// GPIO on PA22

@@ -127,6 +127,7 @@ int32_t _pwm_init(struct _pwm_device *const device, void *const hw)
 	hri_tc_wait_for_sync(hw);
 
 	hri_tc_write_CTRLA_reg(hw, _tcs[i].ctrl_a);
+	hri_tc_set_CTRLC_INVEN1_bit(hw);
 	hri_tc_write_DBGCTRL_reg(hw, _tcs[i].dbg_ctrl);
 	hri_tc_write_EVCTRL_reg(hw, _tcs[i].event_ctrl);
 
