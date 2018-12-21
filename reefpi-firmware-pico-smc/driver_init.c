@@ -152,7 +152,7 @@ void system_init(void)
 	                   // <id> pad_initial_level
 	                   // <false"> Low
 	                   // <true"> High
-	                   true);
+	                   false);
 
 	gpio_set_pin_direction(VEN, GPIO_DIRECTION_OUT);
 	gpio_set_pin_function(VEN, GPIO_PIN_FUNCTION_OFF);
