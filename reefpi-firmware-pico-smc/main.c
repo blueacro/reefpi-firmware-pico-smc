@@ -35,10 +35,22 @@ static void I2C_0_rx_complete(const struct i2c_s_async_descriptor *const descr)
 	}
 }
 
+
+static void I2C_t_error(const struct i2c_s_async_descriptor *const descr)
+{
+	void *   hw    = descr->device.hw;
+	// We explicitly clear the error flag, as well as abort TX and RX
+	hri_sercomi2cm_clear_INTFLAG_ERROR_bit(hw);
+	i2c_s_async_flush_rx_buffer(descr);
+	i2c_s_async_abort_tx(descr);
+	i2c_s_async_enable(descr);
+}
+
 void init_i2c(void)
 {
 	i2c_s_async_get_io_descriptor(&I2C_0, &io);
 	i2c_s_async_register_callback(&I2C_0, I2C_S_RX_COMPLETE, I2C_0_rx_complete);
+	i2c_s_async_register_callback(&I2C_0, I2C_S_ERROR, I2C_t_error);
 	i2c_s_async_enable(&I2C_0);
 }
 
@@ -49,6 +61,8 @@ static void TIMER_0_task1_cb(const struct timer_task *const timer_task)
 		countdown_secs--;
 	}
 }
+
+
 
 void tmr_init(void)
 {
